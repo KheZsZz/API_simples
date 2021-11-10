@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# @Start
+Antes de tudo cerifique que você tenha instalado o Node.js e o VsCode
 
-## Getting Started
+Pós instalção no propt digite:
+* npx create-next-app --nameApp --typescript
 
-First, run the development server:
+feito isso entre na pasta...
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## @serveless-mysql
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Instale o serveless-mysql no seu projeto com o comando:
+* npm i serverless-mysql --save
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## @Lib
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Na Raiz do projeto crie uma pasta chamada "Lib", dentro dela cria um aquivo com o nome que desejar com a extenção ".ts".
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+digite os comandos:
 
-## Learn More
+import mysql from 'serverless-mysql'
 
-To learn more about Next.js, take a look at the following resources:
+export const db = mysql({
+  config: {
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABASE,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    port: 3306,
+  },
+});
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Crie uma função de query:
 
-## Deploy on Vercel
+export default async function queryDB({query, values}:any) {
+  try {
+    const results = await db.query(query, values);
+    await db.end();
+    return results;
+  } catch (e:any) {
+    Error(e.message);
+  }
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* OBS: Não intendo muito de typescrit por isso o tipo de entrada é Any... Se alguém pude me ajudar =)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# @env.local
+
+Na raiz do seu projeto crie um arquivo chamado env.local nele ira todas as suas variaveis de ambiente... Não sei porquê, mas quando se usa "" no arquivo buga tudo e não reconhece as variaveis.
+
+Então digite:
+
+MYSQL_HOST = localhost
+MYSQL_DATABASE = database_post
+MYSQL_USERNAME = root
+MYSQL_PASSWORD = 
+MYSQL_PORT = 3306
+
+* OBS: vale lembrar que o banco já deve estar criado e sendo executado sendo localmente ou hospedado...
+
+# @Continua... =)
