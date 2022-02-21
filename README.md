@@ -1,3 +1,7 @@
+# @Entenda
+
+Esse projeto foi feito para eu entender como o `Next.js` projeta uma API...
+
 # @Start
 Antes de tudo cerifique que você tenha instalado o Node.js e o VsCode
 
@@ -13,7 +17,7 @@ Instale o serveless-mysql no seu projeto com o comando:
 
 ## @Lib
 
-Na Raiz do projeto crie uma pasta chamada "Lib", dentro dela cria um aquivo com o nome que desejar com a extenção ".ts".
+Na Raiz do projeto crie uma pasta chamada "Lib", dentro dela criar um aquivo com o nome que desejar com a extenção ".ts".
 
 digite os comandos:
 
@@ -32,12 +36,12 @@ export const db = mysql({
 
 Crie uma função de query:
 
-export default async function queryDB({query, values}:any) {
+export default async function queryDB({query, values[]}:any) {
   try {
-    const results = await db.query(query, values);
+    const results = await db.query(query, values[]);
     await db.end();
     return results;
-  } catch (e:any) {
+  } catch (e:Error) {
     Error(e.message);
   }
 }
