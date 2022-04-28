@@ -5,8 +5,8 @@ Esse projeto foi feito para eu entender como o `Next.js` projeta uma API...
 # @Start
 Antes de tudo cerifique que você tenha instalado o Node.js e o VsCode
 
-Pós instalção no propt digite:
-* npx create-next-app --nameApp --typescript
+Pós instalação no propt digite:
+* npx create-next-app "nameApp" --typescript
 
 feito isso entre na pasta...
 
